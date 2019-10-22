@@ -1,6 +1,7 @@
 package main
 
 import (
+	dbConn "bass/adapter/gorm"
 	"bass/config"
 	"bass/server/app"
 	"bass/server/router"
@@ -14,7 +15,16 @@ func main() {
 
 	logger := lr.New(appConf.Debug)
 
-	application := app.New(logger)
+	db, err := dbConn.New(appConf)
+	if err != nil {
+		logger.Fatal().Err(err).Msg("")
+		return
+	}
+
+	if appConf.Debug {
+		db.LogMode(true)
+	}
+	application := app.New(logger, db)
 
 	appRouter := router.New(application)
 
