@@ -1,0 +1,24 @@
+version: '3'
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    env_file:
+      - ./docker/app/.env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    build: ./docker/mariadb/
+    environment:
+      MYSQL_ROOT_PASSWORD: bass_root_pass
+      MYSQL_DATABASE: bass_db
+      MYSQL_USER: bass_user
+      MYSQL_PASSWORD: bass_pass
+    ports:
+      - 3306:3306
+    restart: always 
