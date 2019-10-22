@@ -6,6 +6,14 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+const (
+	appErrDataAccessFailure   = "data access failure"
+	appErrJsonCreationFailure = "json creation failure"
+	appErrDataCreationFailure = "data creation failure"
+	appErrFormDecodingFailure = "form decoding failure"
+	appErrDataUpdateFailure   = "data update failure"
+)
+
 type App struct {
 	logger *logger.Logger
 	db     *gorm.DB
