@@ -6,6 +6,7 @@ import (
 	"bass/server/app"
 	"bass/server/router"
 	lr "bass/util/logger"
+	vr "bass/util/validator"
 	"fmt"
 	"net/http"
 )
@@ -24,7 +25,10 @@ func main() {
 	if appConf.Debug {
 		db.LogMode(true)
 	}
-	application := app.New(logger, db)
+
+	validator := vr.New()
+
+	application := app.New(logger, db, validator)
 
 	appRouter := router.New(application)
 

@@ -46,10 +46,10 @@ func (bs Bookings) ToDto() BookingDtos {
 }
 
 type BookingForm struct {
-	Course      string `json:"course"`
-	Class       string `json:"class"`
-	Lab         string `json:"lab"`
-	Teacher     string `json:"teacher"`
+	Course      string `json:"course" form:"required,alpha_space,max=255"`
+	Class       string `json:"class" form:"required,max=255"`
+	Lab         string `json:"lab" form:"required,max=255"`
+	Teacher     string `json:"teacher" form:"required,alpha_space,max=255"`
 	Description string `json:"description"`
 }
 
